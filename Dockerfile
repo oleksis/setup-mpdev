@@ -21,7 +21,7 @@ COPY --from=build ${MPDEV_HOME} ${MPDEV_HOME}
 
 USER ContainerAdministrator
 RUN setx /m PATH "%MPDEV_HOME%;%PATH%"
-USER ContainerUser
+# USER ContainerUser
 
 RUN mkdir C:\src
 

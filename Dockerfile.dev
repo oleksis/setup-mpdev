@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
-# Windows Servercore
 ARG TAG_BUILD=10.0.20348.1
+ARG TAG_FINAL=6.0.21-nanoserver-ltsc2022
 # Image with msiexec
 FROM mcr.microsoft.com/windows/servercore/insider:$TAG_BUILD as build
 
@@ -13,9 +13,18 @@ RUN curl -L -o Master_Packager_Dev_1.0.1.msi https://oleksis.github.io/setup-mpd
     && msiexec /i Master_Packager_Dev_1.0.1.msi /qn \
     && del /F Master_Packager_Dev_1.0.1.msi
 
-RUN curl -L -o dotnet-runtime-6.0.21-win-x64.exe https://oleksis.github.io/setup-mpdev/download/dotnet-runtime-6.0.21-win-x64.exe \
-    && dotnet-runtime-6.0.21-win-x64.exe /install /quiet /norestart \
-    && del /F dotnet-runtime-6.0.21-win-x64.exe
+# final stage/image
+FROM mcr.microsoft.com/dotnet/runtime:$TAG_FINAL
+ENV MPDEV_HOME='C:\Program Files\Master Packager Dev'
+ENV WINDIRSYS32='C:\WINDOWS\System32'
+# TODO: Fix Building MSI
+# mpdev: error: Unable to load DLL 'msi.dll' or one of its dependencies: The specified procedure could not be found. (0x8007007F)
+COPY --from=build ${MPDEV_HOME} ${MPDEV_HOME}
+COPY --from=build ${WINDIRSYS32}/msi.dll ${WINDIRSYS32}/msi.dll
+
+USER ContainerAdministrator
+RUN setx /m PATH "%MPDEV_HOME%;%PATH%"
+# USER ContainerUser
 
 RUN mkdir C:\src
 

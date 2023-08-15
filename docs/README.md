@@ -1,6 +1,17 @@
 # MPDEV Windows Container
+Setup Master Packager Dev
+
+## How to use the Dockerfile
+- Build the image and create MSI/MSIX
+
 ```pwsh
 docker build -t mpdev .
+docker run --name mpdev-cli -it --workdir /src -v C:\path\to\your\src\directory:C:\src mpdev build build/msi/project_mpdev.json
+```
+
+- New container with interactive terminal typing using cmd
+
+```pwsh
 docker run --name mpdev-cli -it --entrypoint cmd.exe --workdir /src -v .:C:/src mpdev
 
 C:\src>mpdev help

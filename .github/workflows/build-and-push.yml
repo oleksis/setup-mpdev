@@ -32,7 +32,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GHCR_PAT }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
@@ -57,7 +57,7 @@ jobs:
           image: ${{ env.IMAGE_NAME }}
           registry: ${{ env.REGISTRY }}
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GHCR_PAT }}
           platform: windows/amd64
           tags: v1, latest
           dockerfile: Dockerfile
@@ -69,6 +69,8 @@ jobs:
         with:
           command: cves
           image: ${{ env.IMAGE_NAME }}:latest
+          registry-user: ${{ github.repository_owner }}
+          registry-password: ${{ secrets.GHCR_PAT }}
           sarif-file: sarif.output.json
           summary: true
 

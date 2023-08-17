@@ -59,7 +59,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
           platform: windows/amd64
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: v1, latest
           dockerfile: Dockerfile
 
       - name: Analyze for critical and high CVEs

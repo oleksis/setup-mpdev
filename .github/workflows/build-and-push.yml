@@ -72,7 +72,7 @@ jobs:
         uses: docker/scout-action@v0.22.2
         with:
           command: cves
-          image: ${{ env.IMAGE_NAME }}:latest
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           dockerhub-user: ${{ github.repository_owner }}
           dockerhub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
           registry-user: ${{ github.repository_owner }}

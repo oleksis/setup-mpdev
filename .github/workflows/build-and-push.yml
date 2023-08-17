@@ -77,7 +77,6 @@ jobs:
           dockerhub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
           registry-user: ${{ github.repository_owner }}
           registry-password: ${{ secrets.GHCR_PAT }}
-          github-token: ${{ secrets.GHCR_PAT }}
           sarif-file: sarif.output.json
           summary: true
 

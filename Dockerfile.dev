@@ -1,4 +1,5 @@
 # syntax=docker/dockerfile:1
+# escape=`
 ARG TAG_BUILD=10.0.20348.1
 ARG TAG_FINAL=6.0.21-nanoserver-ltsc2022
 # Image with msiexec
@@ -9,8 +10,8 @@ LABEL org.opencontainers.image.source=https://github.com/oleksis/setup-mpdev
 LABEL org.opencontainers.image.description="Setup Master Packager Dev"
 # LABEL org.opencontainers.image.licenses=MIT
 
-RUN curl -L -o Master_Packager_Dev_1.0.1.msi https://oleksis.github.io/setup-mpdev/download/Master_Packager_Dev_1.0.1.msi \
-    && msiexec /i Master_Packager_Dev_1.0.1.msi /qn \
+RUN curl -L -o Master_Packager_Dev_1.0.1.msi https://oleksis.github.io/setup-mpdev/download/Master_Packager_Dev_1.0.1.msi `
+    && msiexec /i Master_Packager_Dev_1.0.1.msi /qn `
     && del /F Master_Packager_Dev_1.0.1.msi
 
 # final stage/image
@@ -20,7 +21,10 @@ ENV WINDIRSYS32='C:\WINDOWS\System32'
 # TODO: Fix Building MSI
 # mpdev: error: Unable to load DLL 'msi.dll' or one of its dependencies: The specified procedure could not be found. (0x8007007F)
 COPY --from=build ${MPDEV_HOME} ${MPDEV_HOME}
-COPY --from=build ${WINDIRSYS32}/msi.dll ${WINDIRSYS32}/msi.dll
+COPY --from=build ${WINDIRSYS32}\msiexec.exe `
+                  ${WINDIRSYS32}\msi.dll `
+                  ${WINDIRSYS32}\msihnd.dll `
+                  ${WINDIRSYS32}\msisip.dll ${WINDIRSYS32}\
 
 USER ContainerAdministrator
 RUN setx /m PATH "%MPDEV_HOME%;%PATH%"
@@ -28,7 +32,7 @@ RUN setx /m PATH "%MPDEV_HOME%;%PATH%"
 
 RUN mkdir C:\src
 
-VOLUME C:/src
+VOLUME C:\src
 # WORKDIR /src
 
 ENTRYPOINT ["mpdev.exe"]

@@ -24,8 +24,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push to GitHub Packages
-        uses: docker/build-push-action@v4
+        uses: mr-smithers-excellent/docker-build-push@v6
         with:
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.repository_owner }}/setup-mpdev:latest
-          file: Dockerfile
+          image: setup-mpdev
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          platform: windows/amd64
+          tags: v1, latest
+          dockerfile: Dockerfile

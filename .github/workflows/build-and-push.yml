@@ -17,6 +17,10 @@ env:
 jobs:
   build-and-push:
     runs-on: windows-latest
+    permissions:
+      contents: read
+      packages: write
+      pull-requests: write
 
     steps:
       - name: Checkout Repository

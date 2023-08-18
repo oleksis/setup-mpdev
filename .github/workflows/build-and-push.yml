@@ -9,6 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  IMAGE_NAME_SHORT: setup-mpdev
   IMAGE_NAME: ${{ github.repository }}
   SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
   # Use `latest` as the tag to compare to if empty, assuming that it's already pushed
@@ -58,7 +59,7 @@ jobs:
       - name: Build and push to GitHub Packages
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
-          image: ${{ env.IMAGE_NAME }}
+          image: ${{ env.IMAGE_NAME_SHORT }}
           registry: ${{ env.REGISTRY }}
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_PAT }}

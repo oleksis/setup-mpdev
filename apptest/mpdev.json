@@ -1,0 +1,54 @@
+{
+    "outputTypes": [
+        "msi"
+    ],
+    "outputDirectory": "dist",
+    "packageName": "mpdev-hello",
+    "publisher": "Oleksis Fraga",
+    "version": "1.0.0",
+    "platform": "x64",
+    "installDir": "%PROGRAMFILES%\\$.publisher\\$.packageName",
+    "icon": "apptest\\bin\\Debug\\net6.0\\win-x64\\apptest.exe",
+    "fileSystemEntries": [
+        {
+            "sourcePath": "apptest\\bin\\Debug\\net6.0\\win-x64\\publish",
+            "targetPath": "%PROGRAMFILES%\\Oleksis Fraga\\mpdev-hello"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "mpdev-hello",
+            "target": "%PROGRAMFILES%\\Oleksis Fraga\\mpdev-hello\\apptest.exe",
+            "workingDirectory": "%PROGRAMFILES%\\Oleksis Fraga\\mpdev-hello"
+        }
+    ],
+    "msi": {
+        "installDialog": {
+            "packageDescription": "MPDev Hello World",
+            "primaryAccent": "#0556BD",
+            "publisherUrl": "https://github.com/oleksis/setup-mpdev/",
+            "eulaUrl": "https://github.com/oleksis/setup-mpdev/blob/master/LICENSE"
+        },
+        "properties": [
+            {
+                "name": "ARPURLINFOABOUT",
+                "value": "https://github.com/oleksis/setup-mpdev/"
+            },
+            {
+                "name": "ARPCONTACT",
+                "value": "oleksis.fraga@gmail.com"
+            },
+            {
+                "name": "ARPHELPLINK",
+                "value": "https://github.com/oleksis/setup-mpdev/discussions"
+            }
+        ]
+    },
+    "msix": {
+        "publisher": "CN=Oleksis Fraga",
+        "packageName": "mpdev-hello",
+        "packageDisplayName": "MPDev Hello World",
+        "publisherDisplayName": "Olekis Fraga",
+        "platform": "x64"
+    }
+}

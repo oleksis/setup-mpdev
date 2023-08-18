@@ -19,11 +19,16 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
-      - name: Restore dependencies and Publish
+      - name: Restore Publish Run
         run: |
           pushd apptest
           dotnet restore
           dotnet publish -f net6.0 -r win-x64 --self-contained false
+          dotnet run
           popd
+      # mpdev.exe on Docker need to return Exit code 1 when error: Status: FAILED
+      - name: MPDev MSI/MSIX
+        run: |
+          docker run --name mpdev-hello -i --workdir /src -v .:C:\src ghcr.io/oleksis/setup-mpdev:v1 build apptest/mpdev.json --verbose
       - name: Display Directory
-        run: tree /F .
+        run: tree /F /A .

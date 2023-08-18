@@ -1,0 +1,29 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Packaging .NET app to MSI/MSIX with MPDev
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies and Publish
+        run: |
+          pushd apptest
+          dotnet restore
+          dotnet publish -f net6.0 -r win-x64 --self-contained false
+          popd
+      - name: Display Directory
+        run: tree /F .

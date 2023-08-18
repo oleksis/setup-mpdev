@@ -8,7 +8,7 @@
     "version": "1.0.0",
     "platform": "x64",
     "installDir": "%PROGRAMFILES%\\$.publisher\\$.packageName",
-    "icon": "apptest\\bin\\Debug\\net6.0\\win-x64\\apptest.exe",
+    "icon": "apptest\\mpdev-hello.ico",
     "fileSystemEntries": [
         {
             "sourcePath": "apptest\\bin\\Debug\\net6.0\\win-x64\\publish",

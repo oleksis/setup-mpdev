@@ -1,7 +1,9 @@
 # MPDEV Windows Container
+
 Setup Master Packager Dev
 
 ## How to use the Dockerfile
+
 - Build the image and create MSI/MSIX
 
 ```pwsh
@@ -17,7 +19,19 @@ docker run --name mpdev-cli -it --entrypoint cmd.exe --workdir /src -v .:C:/src 
 C:\src>mpdev help
 ```
 
+## How to use GitHub Container Registry
+
+[Github Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
+
+- [setup-mpdev](https://github.com/oleksis/setup-mpdev/pkgs/container/setup-mpdev)
+
+```pwsh
+docker run --name mpdev-hello -i --workdir /src -v .:C:\src ghcr.io/oleksis/setup-mpdev:v1 build apptest/mpdev.json --verbose
+
+```
+
 ## Links
+
 - [How to install MSI on Windows Container](https://techadviz.com/install-msi-on-container/)
 - [Get started: Run your first Windows container](https://learn.microsoft.com/en-us/virtualization/windowscontainers/quick-start/run-your-first-container)
 - [Windows Containers side by side with Rancher Desktop - for windows containers implementation ideas](https://github.com/rancher-sandbox/rancher-desktop/issues/3999)

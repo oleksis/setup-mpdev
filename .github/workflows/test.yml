@@ -12,6 +12,10 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    permissions:
+        contents: read
+        packages: read
+        pull-requests: read
 
     steps:
       - uses: actions/checkout@v3

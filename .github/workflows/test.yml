@@ -10,18 +10,18 @@ on:
     branches: ["main"]
 
 env:
-    REGISTRY: ghcr.io
-    IMAGE_NAME_SHORT: setup-mpdev
-    IMAGE_NAME: ${{ github.repository }}
-    SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
+  REGISTRY: ghcr.io
+  IMAGE_NAME_SHORT: setup-mpdev
+  IMAGE_NAME: ${{ github.repository }}
+  SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
 
 jobs:
   build:
     runs-on: windows-latest
     permissions:
-        contents: read
-        packages: read
-        pull-requests: read
+      contents: read
+      packages: read
+      pull-requests: read
 
     steps:
       - uses: actions/checkout@v3
@@ -53,5 +53,13 @@ jobs:
       - name: MPDev MSI/MSIX
         run: |
           docker run --name mpdev-hello -i --workdir /src -v .:C:\src ghcr.io/oleksis/setup-mpdev:v1 build apptest/mpdev.json --verbose
+
       - name: Display Directory
         run: tree /F /A .
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: mpdev-hello
+          path: "./dist/msi/mpdev-hello 1.0.0.msi"
+          if-no-files-found: error

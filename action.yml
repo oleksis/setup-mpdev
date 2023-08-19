@@ -1,0 +1,14 @@
+name: "Master Packager Dev Docker Action"
+description: "Setup Master Packager Dev"
+branding:
+  icon: "box"
+  color: "blue"
+inputs:
+  mpdev-params:
+    description: "List of parameters for mpdev"
+    required: true
+runs:
+  using: "docker"
+  image: "ghcr.io/oleksis/setup-mpdev:latest"
+  args:
+    - ${{ fromJSON(inputs.mpdev-params) }}

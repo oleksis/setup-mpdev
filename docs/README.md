@@ -1,6 +1,25 @@
-# MPDEV Windows Container
+# Master Packager Dev Docker Action
 
-Setup Master Packager Dev
+[![Build and Push Docker Container](https://github.com/oleksis/setup-mpdev/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/oleksis/setup-mpdev/actions/workflows/build-and-push.yml)
+[![Packaging .NET app to MSI/MSIX with MPDev](https://github.com/oleksis/setup-mpdev/actions/workflows/test.yml/badge.svg)](https://github.com/oleksis/setup-mpdev/actions/workflows/test.yml)
+
+Setup Master Packager Dev Docker Action
+
+## Inputs
+
+`mpdev-params`
+
+**Required** List of parameters for mpdev
+
+## Example usage
+
+```yaml
+uses: github.com/oleksis/setup-mpdev@v1
+with:
+  mpdev-params: "['build', 'apptest/mpdev.json', '--verbose']"
+```
+
+See more in [test.yml](https://github.com/oleksis/setup-mpdev/blob/main/.github/workflows/test.yml)
 
 ## How to use the Dockerfile
 

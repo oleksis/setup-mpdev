@@ -3,23 +3,25 @@
         "msi"
     ],
     "outputDirectory": "dist",
+    "outputFileName" : "$.packageName_$.version_$.platform",
     "packageName": "mpdev-hello",
     "publisher": "Oleksis Fraga",
     "version": "1.0.0",
     "platform": "x64",
     "installDir": "%PROGRAMFILES%\\$.publisher\\$.packageName",
+    "compresionLevel": "Max",
     "icon": "apptest\\mpdev-hello.ico",
     "fileSystemEntries": [
         {
             "sourcePath": "apptest\\bin\\Debug\\net6.0\\win-x64\\publish",
-            "targetPath": "%PROGRAMFILES%\\Oleksis Fraga\\mpdev-hello"
+            "targetPath": "$.installDir"
         }
     ],
     "shortcuts": [
         {
             "name": "mpdev-hello",
-            "target": "%PROGRAMFILES%\\Oleksis Fraga\\mpdev-hello\\apptest.exe",
-            "workingDirectory": "%PROGRAMFILES%\\Oleksis Fraga\\mpdev-hello"
+            "target": "$.installDir\\apptest.exe",
+            "workingDirectory": "$.installDir"
         }
     ],
     "msi": {
@@ -45,10 +47,10 @@
         ]
     },
     "msix": {
-        "publisher": "CN=Oleksis Fraga",
-        "packageName": "mpdev-hello",
-        "packageDisplayName": "MPDev Hello World",
-        "publisherDisplayName": "Olekis Fraga",
+        "publisher": "CN=$.publisher",
+        "packageName": "$.packageName",
+        "packageDisplayName": "$.msi.installDialog.packageDescription",
+        "publisherDisplayName": "$.publisher",
         "platform": "x64"
     }
 }

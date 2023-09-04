@@ -10,13 +10,13 @@ LABEL org.opencontainers.image.source=https://github.com/oleksis/setup-mpdev
 LABEL org.opencontainers.image.description="Setup Master Packager Dev"
 # LABEL org.opencontainers.image.licenses=MIT
 
-RUN curl -L -o Master_Packager_Dev_1.0.1.msi https://oleksis.github.io/setup-mpdev/download/Master_Packager_Dev_1.0.1.msi `
-    && msiexec /i Master_Packager_Dev_1.0.1.msi /qn `
-    && del /F Master_Packager_Dev_1.0.1.msi
+RUN curl.exe -L -o mpdev_self_contained_x64_1.0.2.msi https://oleksis.github.io/setup-mpdev/download/mpdev_self_contained_x64_1.0.2.msi `
+    && msiexec /i mpdev_self_contained_x64_1.0.2.msi /qn `
+    && del /F mpdev_self_contained_x64_1.0.2.msi
 
-RUN curl -L -o dotnet-runtime-6.0.21-win-x64.exe https://oleksis.github.io/setup-mpdev/download/dotnet-runtime-6.0.21-win-x64.exe `
-    && dotnet-runtime-6.0.21-win-x64.exe /install /quiet /norestart `
-    && del /F dotnet-runtime-6.0.21-win-x64.exe
+# RUN curl -L -o dotnet-runtime-6.0.21-win-x64.exe https://oleksis.github.io/setup-mpdev/download/dotnet-runtime-6.0.21-win-x64.exe `
+#     && dotnet-runtime-6.0.21-win-x64.exe /install /quiet /norestart `
+#     && del /F dotnet-runtime-6.0.21-win-x64.exe
 
 RUN mkdir C:\src
 

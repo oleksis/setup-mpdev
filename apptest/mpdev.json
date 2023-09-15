@@ -9,7 +9,7 @@
     "version": "1.0.0",
     "platform": "x64",
     "installDir": "%PROGRAMFILES%\\$.publisher\\$.packageName",
-    "compresionLevel": "Max",
+    "compressionLevel": "Max",
     "icon": "apptest\\mpdev-hello.ico",
     "fileSystemEntries": [
         {
@@ -44,7 +44,8 @@
                 "name": "ARPHELPLINK",
                 "value": "https://github.com/oleksis/setup-mpdev/discussions"
             }
-        ]
+        ],
+        "upgradeCode": "{864F1A0E-4DC0-4549-AB2A-0A49B16E02D5}"
     },
     "msix": {
         "publisher": "CN=$.publisher",

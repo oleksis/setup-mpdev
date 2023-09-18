@@ -8,15 +8,15 @@ FROM mcr.microsoft.com/windows/servercore/insider:$TAG_BUILD as build
 LABEL maintainer="Oleksis Fraga <oleksis.fraga at gmail.com>"
 LABEL org.opencontainers.image.source=https://github.com/oleksis/setup-mpdev
 LABEL org.opencontainers.image.description="Setup Master Packager Dev"
-# LABEL org.opencontainers.image.licenses=MIT
+LABEL org.opencontainers.image.licenses=MIT
 
-RUN curl -L -o Master_Packager_Dev_1.0.1.msi https://oleksis.github.io/setup-mpdev/download/Master_Packager_Dev_1.0.1.msi `
-    && msiexec /i Master_Packager_Dev_1.0.1.msi /qn `
-    && del /F Master_Packager_Dev_1.0.1.msi
+RUN curl.exe -L -o mpdev_self_contained_x64_1.0.4.msi https://oleksis.github.io/setup-mpdev/download/mpdev_self_contained_x64_1.0.4.msi `
+    && msiexec /i mpdev_self_contained_x64_1.0.4.msi /qn `
+    && del /F mpdev_self_contained_x64_1.0.4.msi
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/runtime:$TAG_FINAL
-ENV MPDEV_HOME='C:\Program Files\Master Packager Dev'
+ENV MPDEV_HOME='C:\Program Files\Master Packager Ltd\Master Packager Dev'
 ENV WINDIRSYS32='C:\WINDOWS\System32'
 # TODO: Fix Building MSI
 # mpdev: error: Unable to load DLL 'msi.dll' or one of its dependencies: The specified procedure could not be found. (0x8007007F)

@@ -16,6 +16,7 @@ RUN curl.exe -L -o mpdev_self_contained_x64_1.0.4.msi https://oleksis.github.io/
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/runtime:$TAG_FINAL
+# hadolint shell=powershell
 ENV MPDEV_HOME='C:\Program Files\Master Packager Ltd\Master Packager Dev'
 ENV WINDIRSYS32='C:\WINDOWS\System32'
 # TODO: Fix Building MSI
@@ -24,13 +25,12 @@ COPY --from=build ${MPDEV_HOME} ${MPDEV_HOME}
 COPY --from=build ${WINDIRSYS32}\msiexec.exe `
                   ${WINDIRSYS32}\msi.dll `
                   ${WINDIRSYS32}\msihnd.dll `
-                  ${WINDIRSYS32}\msisip.dll ${WINDIRSYS32}\
+                  ${WINDIRSYS32}\msisip.dll ${WINDIRSYS32}/
 
 USER ContainerAdministrator
-RUN setx /m PATH "%MPDEV_HOME%;%PATH%"
+RUN setx /m PATH "%MPDEV_HOME%;%PATH%" `
+    && mkdir C:\src
 # USER ContainerUser
-
-RUN mkdir C:\src
 
 VOLUME C:\src
 # WORKDIR /src

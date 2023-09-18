@@ -4,7 +4,7 @@
 ARG TAG_BUILD=10.0.20348.1
 # Image with Windows Installer - msiexec
 FROM mcr.microsoft.com/windows/servercore/insider:$TAG_BUILD as build
-
+# hadolint shell=powershell
 LABEL maintainer="Oleksis Fraga <oleksis.fraga at gmail.com>"
 LABEL org.opencontainers.image.source=https://github.com/oleksis/setup-mpdev
 LABEL org.opencontainers.image.description="Setup Master Packager Dev"

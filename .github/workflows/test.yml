@@ -52,7 +52,7 @@ jobs:
       # mpdev.exe on Docker need to return Exit code 1 when error: Status: FAILED
       - name: MPDev MSI/MSIX
         run: |
-          docker run --name mpdev-hello -i --workdir /src -v .:C:\src ghcr.io/oleksis/setup-mpdev:v1 build apptest/mpdev.json --verbose
+          docker run --name mpdev-hello -i --workdir /src -v .:C:\src ghcr.io/oleksis/setup-mpdev:v1 build apptest/mpdev.json --working-dir ${GITHUB_WORKSPACE} --verbose
 
       - name: Display Directory
         run: tree /F /A .
@@ -61,5 +61,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: mpdev-hello
-          path: "./dist/msi/mpdev-hello 1.0.0.msi"
+          path: "./dist/mpdev-hello_1.0.0_x64.msi"
           if-no-files-found: error

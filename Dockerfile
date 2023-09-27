@@ -8,11 +8,11 @@ FROM mcr.microsoft.com/windows/servercore/insider:$TAG_BUILD as build
 LABEL maintainer="Oleksis Fraga <oleksis.fraga at gmail.com>"
 LABEL org.opencontainers.image.source=https://github.com/oleksis/setup-mpdev
 LABEL org.opencontainers.image.description="Setup Master Packager Dev"
-# LABEL org.opencontainers.image.licenses=MIT
+LABEL org.opencontainers.image.licenses=MIT
 
-RUN curl.exe -L -o mpdev_self_contained_x64_1.0.4.msi https://oleksis.github.io/setup-mpdev/download/mpdev_self_contained_x64_1.0.4.msi `
-    && msiexec /i mpdev_self_contained_x64_1.0.4.msi /qn `
-    && del /F mpdev_self_contained_x64_1.0.4.msi
+RUN curl.exe -L -o mpdev_self_contained_x64_1.0.5.msi https://github.com/MasterPackager/Master-Packager-Dev/releases/download/1.0.5/mpdev_self_contained_x64_1.0.5.msi `
+    && msiexec /i mpdev_self_contained_x64_1.0.5.msi /qn `
+    && del /F mpdev_self_contained_x64_1.0.5.msi
 
 # RUN curl -L -o dotnet-runtime-6.0.21-win-x64.exe https://oleksis.github.io/setup-mpdev/download/dotnet-runtime-6.0.21-win-x64.exe `
 #     && dotnet-runtime-6.0.21-win-x64.exe /install /quiet /norestart `

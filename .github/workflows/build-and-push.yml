@@ -66,11 +66,11 @@ jobs:
           platform: windows/amd64
           tags: v1, latest
           dockerfile: Dockerfile
-
+      # https://github.com/docker/scout-action#analyze-vulnerabilities-and-upload-report-to-github-code-scanning
       - name: Analyze for critical and high CVEs
         id: docker-scout-cves
         if: ${{ github.event_name != 'pull_request_target' }}
-        uses: docker/scout-action@v0.22.2
+        uses: docker/scout-action@v1
         with:
           command: cves
           image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
@@ -82,9 +82,9 @@ jobs:
           summary: true
 
       # Code scanning is available for all public repositories
-      # - name: Upload SARIF result
-      #   id: upload-sarif
-      #   if: ${{ github.event_name != 'pull_request_target' }}
-      #   uses: github/codeql-action/upload-sarif@v2
-      #   with:
-      #     sarif_file: sarif.output.json
+      - name: Upload SARIF result
+        id: upload-sarif
+        if: ${{ github.event_name != 'pull_request_target' }}
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: sarif.output.json

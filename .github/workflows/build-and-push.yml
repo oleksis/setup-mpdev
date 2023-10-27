@@ -67,24 +67,27 @@ jobs:
           tags: v1, latest
           dockerfile: Dockerfile
       # https://github.com/docker/scout-action#analyze-vulnerabilities-and-upload-report-to-github-code-scanning
-      - name: Analyze for critical and high CVEs
-        id: docker-scout-cves
-        if: ${{ github.event_name != 'pull_request_target' }}
-        uses: docker/scout-action@v1
-        with:
-          command: cves
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          dockerhub-user: ${{ github.repository_owner }}
-          dockerhub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          registry-user: ${{ github.repository_owner }}
-          registry-password: ${{ secrets.GHCR_PAT }}
-          sarif-file: sarif.output.json
-          summary: true
+      # FIX: runtime: VirtualAlloc of 2801508352 bytes failed with errno=1455
+      #      fatal error: out of memory
+      # Image size: 2.9 GB
+      # - name: Analyze for critical and high CVEs
+      #   id: docker-scout-cves
+      #   if: ${{ github.event_name != 'pull_request_target' }}
+      #   uses: docker/scout-action@v1
+      #   with:
+      #     command: cves
+      #     image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+      #     dockerhub-user: ${{ github.repository_owner }}
+      #     dockerhub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      #     registry-user: ${{ github.repository_owner }}
+      #     registry-password: ${{ secrets.GHCR_PAT }}
+      #     sarif-file: sarif.output.json
+      #     summary: true
 
       # Code scanning is available for all public repositories
-      - name: Upload SARIF result
-        id: upload-sarif
-        if: ${{ github.event_name != 'pull_request_target' }}
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: sarif.output.json
+      # - name: Upload SARIF result
+      #   id: upload-sarif
+      #   if: ${{ github.event_name != 'pull_request_target' }}
+      #   uses: github/codeql-action/upload-sarif@v2
+      #   with:
+      #     sarif_file: sarif.output.json

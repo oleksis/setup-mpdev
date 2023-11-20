@@ -36,7 +36,6 @@ jobs:
           pushd apptest
           dotnet restore
           dotnet publish -f net6.0 -r win-x64 --self-contained false
-          dotnet run
           popd
 
       - name: Set up Docker Buildx

@@ -21,7 +21,8 @@
         {
             "name": "mpdev-hello",
             "target": "$.installDir\\apptest.exe",
-            "workingDirectory": "$.installDir"
+            "workingDirectory": "$.installDir",
+            "icon": "$.icon"
         }
     ],
     "msi": {

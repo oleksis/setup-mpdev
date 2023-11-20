@@ -1,18 +1,18 @@
 # syntax=docker/dockerfile:1
 # escape=`
 # Windows Servercore
-ARG TAG_BUILD=10.0.20348.1
+ARG TAG_BUILD=10.0.20348.1-amd64
 # Image with Windows Installer - msiexec
-FROM mcr.microsoft.com/windows/servercore/insider:$TAG_BUILD as build
+FROM mcr.microsoft.com/windows/server/insider:$TAG_BUILD as build
 # hadolint shell=powershell
 LABEL maintainer="Oleksis Fraga <oleksis.fraga at gmail.com>"
 LABEL org.opencontainers.image.source=https://github.com/oleksis/setup-mpdev
 LABEL org.opencontainers.image.description="Setup Master Packager Dev"
 LABEL org.opencontainers.image.licenses=MIT
 
-RUN curl.exe -L -o mpdev_self_contained_x64_1.0.6.msi https://github.com/MasterPackager/Master-Packager-Dev/releases/download/1.0.6/mpdev_self_contained_x64_1.0.6.msi `
-    && msiexec /i mpdev_self_contained_x64_1.0.6.msi /qn `
-    && del /F mpdev_self_contained_x64_1.0.6.msi
+RUN curl.exe -L -o mpdev_self_contained_x64_1.0.7.msi https://github.com/MasterPackager/Master-Packager-Dev/releases/download/1.0.7/mpdev_self_contained_x64_1.0.7.msi `
+    && msiexec /i mpdev_self_contained_x64_1.0.7.msi /qn `
+    && del /F mpdev_self_contained_x64_1.0.7.msi
 
 # RUN curl -L -o dotnet-runtime-6.0.21-win-x64.exe https://oleksis.github.io/setup-mpdev/download/dotnet-runtime-6.0.21-win-x64.exe `
 #     && dotnet-runtime-6.0.21-win-x64.exe /install /quiet /norestart `

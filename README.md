@@ -46,7 +46,6 @@ C:\src>mpdev help
 
 ```pwsh
 docker run --name mpdev-hello -i --workdir /src -v .:C:\src ghcr.io/oleksis/setup-mpdev:v1 build apptest/mpdev.json --verbose
-
 ```
 
 ## Links

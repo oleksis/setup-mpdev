@@ -10,15 +10,17 @@ LABEL org.opencontainers.image.source=https://github.com/oleksis/setup-mpdev
 LABEL org.opencontainers.image.description="Setup Master Packager Dev"
 LABEL org.opencontainers.image.licenses=MIT
 
-RUN curl.exe -L -o mpdev_self_contained_x64_1.0.7.msi https://github.com/MasterPackager/Master-Packager-Dev/releases/download/1.0.7/mpdev_self_contained_x64_1.0.7.msi `
-    && msiexec /i mpdev_self_contained_x64_1.0.7.msi /qn `
-    && del /F mpdev_self_contained_x64_1.0.7.msi
+SHELL [ "powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';" ]
 
-# RUN curl -L -o dotnet-runtime-6.0.21-win-x64.exe https://oleksis.github.io/setup-mpdev/download/dotnet-runtime-6.0.21-win-x64.exe `
-#     && dotnet-runtime-6.0.21-win-x64.exe /install /quiet /norestart `
-#     && del /F dotnet-runtime-6.0.21-win-x64.exe
+RUN Invoke-WebRequest -Uri "https://github.com/MasterPackager/Master-Packager-Dev/releases/download/1.0.7/mpdev_self_contained_x64_1.0.7.msi" -OutFile "mpdev_self_contained_x64_1.0.7.msi"; `
+    Start-Process msiexec.exe -ArgumentList '/i', 'mpdev_self_contained_x64_1.0.7.msi', '/qn' -NoNewWindow -Wait ; `
+    Remove-Item -Force mpdev_self_contained_x64_1.0.7.msi
 
-RUN mkdir C:\src
+# RUN Invoke-WebRequest -Uri "https://oleksis.github.io/setup-mpdev/download/dotnet-runtime-6.0.21-win-x64.exe" -OutFile "dotnet-runtime-6.0.21-win-x64.exe" ; `
+#     Start-Process dotnet-runtime-6.0.21-win-x64.exe -ArgumentList '/install', '/quiet', '/norestart' -NoNewWindow -Wait ; `
+#     Remove-Item -Force dotnet-runtime-6.0.21-win-x64.exe
+
+RUN New-Item -ItemType Directory -Force -Path C:\src
 
 VOLUME C:\src
 # WORKDIR /src
